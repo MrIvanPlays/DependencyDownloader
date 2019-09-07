@@ -145,15 +145,13 @@ public final class LibraryInjector {
     }
 
     /**
-     * Returns a collection copy of all dependencies which were downloaded
-     * or are to be downloaded.
+     * Returns a unmodifiable collection of all dependencies
+     * which were downloaded or are to be downloaded.
      *
      * @return dependencies
      */
     public List<Dependency> getDependencies() {
-        List<Dependency> collection = new ArrayList<>(toDownload.size());
-        Collections.copy(collection, toDownload);
-        return collection;
+        return Collections.unmodifiableList(toDownload);
     }
 
     /**
