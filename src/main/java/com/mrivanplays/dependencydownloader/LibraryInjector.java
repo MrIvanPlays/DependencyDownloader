@@ -171,8 +171,10 @@ public final class LibraryInjector {
             );
             String name = dependency.getArtifactId() + "-" + dependency.getVersion();
             File saveLocation = new File(dependencyDir, name + ".jar");
+            boolean wasExisting = true;
             if (!saveLocation.exists()) {
-                log("Dependency '" + name + "' is not already in the libraries folder. Attempting to download...");
+                wasExisting = false;
+                log("Dependency '" + name + "' is not downloaded. Attempting to download...");
                 try {
                     URL downloadUrl = dependency.getUrl();
 
@@ -187,7 +189,9 @@ public final class LibraryInjector {
 
             if (!saveLocation.exists()) {
                 throw new RuntimeException("Unable to download dependency: " + dependency.toString());
-            } else {
+            }
+
+            if (!wasExisting) {
                 log("Successfully downloaded dependency: " + name);
             }
 
