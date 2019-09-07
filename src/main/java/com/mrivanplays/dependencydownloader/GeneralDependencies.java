@@ -42,7 +42,8 @@ public enum GeneralDependencies {
     ASM_UTIL("org.ow2.asm", "asm-util", "7.0"),
     // specifically minecraft related stuff
     COMMODORE("me.lucko", "commodore", "1.3"),
-    ADVANCEMENT_CREATOR("com.github.Trigary", "AdvancementCreator", "v2.0", "https://jitpack.io");
+    ADVANCEMENT_CREATOR("com.github.Trigary", "AdvancementCreator", "v2.0", "https://jitpack.io"),
+    LIGHTNING_STORAGE("com.github.JavaFactoryDev", "LightningStorage", "2.3.8", "https://jitpack.io");
 
     private final String groupId;
     private final String artifactId;
