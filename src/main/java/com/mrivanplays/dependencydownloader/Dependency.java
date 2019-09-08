@@ -44,96 +44,91 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
-/**
- * Represents general dependency
- */
+/** Represents general dependency */
 public final class Dependency {
 
-    private final String groupId;
-    private final String artifactId;
-    private final String version;
-    private final String repoUrl;
+  private final String groupId;
+  private final String artifactId;
+  private final String version;
+  private final String repoUrl;
 
-    public Dependency(
-            String groupId,
-            String artifactId,
-            String version,
-            String repoUrl
-    ) {
-        this.groupId = Objects.requireNonNull(groupId, "groupId");
-        this.artifactId = Objects.requireNonNull(artifactId, "artifactId");
-        this.version = Objects.requireNonNull(version, "version");
-        this.repoUrl = Objects.requireNonNull(repoUrl, "repoUrl");
+  public Dependency(String groupId, String artifactId, String version, String repoUrl) {
+    this.groupId = Objects.requireNonNull(groupId, "groupId");
+    this.artifactId = Objects.requireNonNull(artifactId, "artifactId");
+    this.version = Objects.requireNonNull(version, "version");
+    this.repoUrl = Objects.requireNonNull(repoUrl, "repoUrl");
+  }
+
+  /**
+   * Returns the group id of that dependency.
+   *
+   * @return group id
+   */
+  public String getGroupId() {
+    return groupId;
+  }
+
+  /**
+   * Returns the artifact id of that dependency.
+   *
+   * @return artifact id
+   */
+  public String getArtifactId() {
+    return artifactId;
+  }
+
+  /**
+   * Returns the version of that dependency
+   *
+   * @return version
+   */
+  public String getVersion() {
+    return version;
+  }
+
+  /**
+   * Returns the repository, from where the dependency's being downloaded.
+   *
+   * @return repository url
+   */
+  public String getRepoUrl() {
+    return repoUrl;
+  }
+
+  /**
+   * Returns the download url of the dependency.
+   *
+   * @return download url
+   * @throws MalformedURLException (taken from {@link URL}: if no protocol is specified, or an
+   *     unknown protocol is found, or {@code spec} is {@code null}.)
+   */
+  public URL getUrl() throws MalformedURLException {
+    String repo = repoUrl;
+    if (!repo.endsWith("/")) {
+      repo += "/";
     }
+    repo += "%s/%s/%s/%s-%s.jar";
 
-    /**
-     * Returns the group id of that dependency.
-     *
-     * @return group id
-     */
-    public String getGroupId() {
-        return groupId;
-    }
+    String url =
+        String.format(repo, groupId.replace(".", "/"), artifactId, version, artifactId, version);
+    return new URL(url);
+  }
 
-    /**
-     * Returns the artifact id of that dependency.
-     *
-     * @return artifact id
-     */
-    public String getArtifactId() {
-        return artifactId;
-    }
-
-    /**
-     * Returns the version of that dependency
-     *
-     * @return version
-     */
-    public String getVersion() {
-        return version;
-    }
-
-    /**
-     * Returns the repository, from where the dependency's being downloaded.
-     *
-     * @return repository url
-     */
-    public String getRepoUrl() {
-        return repoUrl;
-    }
-
-    /**
-     * Returns the download url of the dependency.
-     *
-     * @return download url
-     * @throws MalformedURLException (taken from {@link URL}: if no protocol is specified, or an
-     * unknown protocol is found, or {@code spec} is {@code null}.)
-     */
-    public URL getUrl() throws MalformedURLException {
-        String repo = repoUrl;
-        if (!repo.endsWith("/")) {
-            repo += "/";
-        }
-        repo += "%s/%s/%s/%s-%s.jar";
-
-        String url = String.format(
-                repo,
-                groupId.replace(".", "/"),
-                artifactId,
-                version,
-                artifactId,
-                version
-        );
-        return new URL(url);
-    }
-
-    @Override
-    public String toString() {
-        return "Dependency(" +
-                "groupId='" + groupId + '\'' +
-                ", artifactId='" + artifactId + '\'' +
-                ", version='" + version + '\'' +
-                ", repoUrl='" + repoUrl + '\'' +
-                ')';
-    }
+  @Override
+  public String toString() {
+    return "Dependency("
+        + "groupId='"
+        + groupId
+        + '\''
+        + ", artifactId='"
+        + artifactId
+        + '\''
+        + ", version='"
+        + version
+        + '\''
+        + ", repoUrl='"
+        + repoUrl
+        + '\''
+        + ')';
+  }
 }

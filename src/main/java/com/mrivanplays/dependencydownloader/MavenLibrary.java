@@ -22,40 +22,38 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Annotation which defines a maven library in the specified class.
- */
+/** Annotation which defines a maven library in the specified class. */
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MavenLibrary {
 
-    /**
-     * The group id of the library (ex. "org.spigotmc")
-     *
-     * @return group id
-     */
-    String groupId();
+  /**
+   * The group id of the library (ex. "org.spigotmc")
+   *
+   * @return group id
+   */
+  String groupId();
 
-    /**
-     * The artifact id of the library (ex. "spigot-api")
-     *
-     * @return artifact id
-     */
-    String artifactId();
+  /**
+   * The artifact id of the library (ex. "spigot-api")
+   *
+   * @return artifact id
+   */
+  String artifactId();
 
-    /**
-     * The version of the library (ex. "1.14.4-R0.1-SNAPSHOT")
-     *
-     * @return version
-     */
-    String version();
+  /**
+   * The version of the library (ex. "1.14.4-R0.1-SNAPSHOT")
+   *
+   * @return version
+   */
+  String version();
 
-    /**
-     * The repository url of where to find the library. By default
-     * that's the maven central repository.
-     *
-     * @return repository url
-     */
-    String repoUrl() default "http://repo1.maven.org/maven2";
+  /**
+   * The repository url of where to find the library. By default that's the maven central
+   * repository.
+   *
+   * @return repository url
+   */
+  String repoUrl() default "http://repo1.maven.org/maven2";
 }
